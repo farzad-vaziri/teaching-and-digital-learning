@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teaching and digital learning: live games by Farzad Vaziri</title>
+<meta name="description" content="Two live classroom business games: a simulated class playing the Fashion Market Game, and a single-player version to play yourself, with learning outcomes and a session plan.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Teaching and digital learning: live classroom games">
+<meta property="og:description" content="Two live business-simulation games for teaching marketing and strategy.">
+<meta property="og:image" content="https://farzad-vaziri.github.io/teaching-and-digital-learning/assets/previews/fmg-main.jpg">
+<link rel="preload" href="assets/fonts/lexend-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/lexend-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Lexend;font-weight:400;font-display:swap;src:url(assets/fonts/lexend-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Lexend;font-weight:500;font-display:swap;src:url(assets/fonts/lexend-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Lexend;font-weight:600;font-display:swap;src:url(assets/fonts/lexend-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Lexend;font-weight:700;font-display:swap;src:url(assets/fonts/lexend-latin-700-normal.woff2) format('woff2')}
+
+:root{--bg:#f6f5ff;--panel:#fff;--ink:#1e1b3a;--muted:#5f5b7d;--violet:#5b45e0;--violet-2:#ece8ff;--mint:#0f9f74;--mint-2:#dcf6ec;--coral:#f0644b;--line:#e1ddf5;--shadow:0 1px 2px rgba(40,30,110,.06),0 8px 24px rgba(40,30,110,.08);--btn-ink:#fff;--img:none}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#13112a;--panel:#1d1a3b;--ink:#ecebfa;--muted:#aaa6cc;--violet:#9d8cff;--violet-2:#2a2552;--mint:#4fd6a4;--mint-2:#173a33;--coral:#ff8a73;--line:#322d5c;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);--btn-ink:#14112b;--img:brightness(.9)}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Lexend,system-ui,sans-serif;font-size:1rem;line-height:1.65;font-weight:400}
+h1,h2,h3,h4,.pill,.btn,.top,.step b,.lbl{font-family:Lexend,system-ui,sans-serif}
+a{color:var(--violet)}
+img{filter:var(--img)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--panel);padding:8px;z-index:9}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:999px;background:var(--violet-2);color:var(--violet);margin:0 6px 6px 0}
+.pill.live{background:var(--mint-2);color:var(--mint)}
+.pill.coral{background:transparent;border:1.5px solid var(--coral);color:var(--coral)}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-size:.875rem;font-weight:500}
+.top .logo{display:flex;align-items:center;gap:10px}
+.top .logo i{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--violet),var(--coral));display:inline-block}
+.top .c{color:var(--muted)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:7fr 5fr;gap:36px;padding:26px 0 40px}
+.lbl{font-size:.8125rem;font-weight:600;color:var(--violet);letter-spacing:.02em}
+.hero h1{font-weight:700;font-size:clamp(2.5rem,5.6vw,4.2rem);line-height:1.04;letter-spacing:-.025em;margin:10px 0 0}
+.hero h1 span{background:linear-gradient(90deg,var(--violet),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .intro{font-size:1.25rem;line-height:1.5;margin:20px 0 0}
+.hero .note{color:var(--muted);font-size:.9375rem;margin:12px 0 0}
+.outline{background:var(--panel);border-radius:20px;box-shadow:var(--shadow);padding:22px 22px 18px;align-self:start}
+.outline h2{font-size:1rem;margin:0 0 4px}
+.outline .prog{height:8px;background:var(--violet-2);border-radius:99px;overflow:hidden;margin:8px 0 14px}
+.outline .prog i{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--violet),var(--coral));border-radius:99px}
+.outline ol{list-style:none;margin:0;padding:0;position:relative}
+.outline ol::before{content:"";position:absolute;left:15px;top:12px;bottom:12px;width:2px;background:var(--line)}
+.outline li a{display:flex;gap:14px;align-items:center;padding:8px 0;text-decoration:none;color:var(--ink);position:relative}
+.outline li a b{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--panel);border:2px solid var(--violet);color:var(--violet);font-size:.8125rem}
+.outline li:first-child a b{background:var(--violet);color:var(--btn-ink)}
+.outline li a span{font-weight:600}
+.outline li a small{display:block;color:var(--muted);font-weight:400;font-size:.8125rem}
+.outline li a:hover span{text-decoration:underline}
+
+/* featured lesson */
+.feat{background:var(--panel);border-radius:24px;box-shadow:var(--shadow);padding:30px;display:grid;grid-template-columns:7fr 5fr;gap:32px}
+.feat .m img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line)}
+.feat h2{font-size:2rem;line-height:1.12;letter-spacing:-.015em;margin:8px 0 12px}
+.feat h2 a{color:var(--ink);text-decoration:none}.feat h2 a:hover{color:var(--violet)}
+.feat p{margin:0 0 12px}
+.btn{display:inline-block;background:var(--violet);color:var(--btn-ink);padding:12px 22px;border-radius:999px;font-weight:600;text-decoration:none;box-shadow:0 4px 14px rgba(91,69,224,.3)}
+.btn:hover{background:var(--coral)}
+.more{display:inline-block;margin:0 0 0 16px;font-weight:600}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.thumbs figure{margin:0}
+.thumbs img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)}
+.thumbs figcaption{font-size:.8125rem;color:var(--muted);margin-top:4px;line-height:1.3}
+.thumbs a:hover img,.card .pic:hover img{outline:3px solid var(--coral)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 0}
+.facts div{background:var(--violet-2);border-radius:12px;padding:10px 12px;font-size:.875rem}
+.facts b{display:block;font-family:Lexend,sans-serif;font-size:1.125rem}
+
+/* sections */
+section.s{padding:54px 0 0}
+.sh{display:flex;gap:16px;align-items:center;margin-bottom:22px}
+.sh .num{flex:0 0 52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--violet),var(--coral));color:#fff;font-family:Lexend,sans-serif;font-weight:700;font-size:1.25rem;display:grid;place-items:center}
+.sh h2{font-size:1.75rem;line-height:1.15;margin:0}
+.sh p{margin:2px 0 0;color:var(--muted)}
+.card{background:var(--panel);border-radius:24px;box-shadow:var(--shadow);padding:26px;display:grid;grid-template-columns:7fr 5fr;gap:30px;align-items:center}
+.card .pic img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line)}
+.card h3{font-size:1.625rem;line-height:1.15;margin:8px 0 10px}
+.card h3 a{color:var(--ink);text-decoration:none}.card h3 a:hover{color:var(--violet)}
+.card p{margin:0 0 14px}
+.links{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-weight:600}
+
+/* class kit */
+.kit{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel{background:var(--panel);border-radius:20px;box-shadow:var(--shadow);padding:24px}
+.panel h3{font-size:1.25rem;margin:0 0 12px}
+.oc{list-style:none;margin:0;padding:0}
+.oc li{display:flex;gap:12px;padding:7px 0}
+.oc svg{flex:0 0 22px;height:22px;margin-top:2px}
+.oc svg circle{fill:var(--mint-2)}.oc svg path{fill:none;stroke:var(--mint);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.plan{list-style:none;margin:0;padding:0}
+.step{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.step:last-child{border-bottom:0}
+.step .t{font-family:Lexend,sans-serif;font-size:.8125rem;font-weight:600;color:var(--coral);padding-top:2px}
+.step b{display:block;font-weight:600}
+.qs{grid-column:1/-1}
+.qs ol{margin:0;padding:0;list-style:none;counter-reset:q;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qs li{counter-increment:q;background:var(--violet-2);border-radius:14px;padding:14px 16px 14px 54px;position:relative}
+.qs li::before{content:"Q" counter(q);position:absolute;left:14px;top:13px;font-family:Lexend,sans-serif;font-weight:700;color:var(--violet)}
+
+/* write-ups */
+.wu{background:var(--panel);border-radius:24px;box-shadow:var(--shadow);padding:28px;margin-bottom:24px}
+.wtop h3{font-size:1.625rem;line-height:1.15;margin:4px 0 4px}
+.wtop .meta{margin:0 0 6px;color:var(--muted)}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 30px}
+.wr{padding:12px 0;border-top:1px solid var(--line)}
+.wr h4{font-size:.9375rem;color:var(--violet);margin:0 0 4px}
+.wr p{margin:0}.wr ul{margin:0;padding-left:1.1em}.wr li{margin:0 0 4px}
+.wu figure{margin:18px 0 0}
+.wu figure img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line)}
+.wu figcaption{font-size:.875rem;color:var(--muted);margin-top:8px}
+.wact{margin:16px 0 0;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.top-link{font-weight:600;font-size:.9375rem}
+
+footer{margin-top:44px;padding:24px 0 52px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 2fr;gap:24px;font-size:.875rem;color:var(--muted)}
+footer .a{font-family:Lexend,sans-serif;font-weight:600;color:var(--ink)}
+footer p{margin:0 0 8px}
+
+@media (max-width:900px){
+  .hero,.feat,.card,.kit{grid-template-columns:1fr}
+  .thumbs{grid-template-columns:1fr 1fr}
+  .wgrid,.qs ol{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  body{font-size:1rem}
+  .wrap{padding:0 16px}
+  .top .c{display:none}
+  .hero{padding:12px 0 30px}
+  .hero .intro{font-size:1.125rem}
+  .feat,.card,.wu,.panel{padding:18px;border-radius:18px}
+  .feat h2{font-size:1.625rem}
+  .more{display:block;margin:12px 0 0}
+  .sh h2{font-size:1.4rem}
+  .step{grid-template-columns:1fr;gap:2px}
+  footer{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top">
+  <div class="logo"><i></i><span>Collection · Teaching and digital learning</span></div>
+  <div class="c">Farzad Vaziri</div>
+</header>
+
+<main id="main">
+<div class="hero" id="top">
+  <div>
+    <div class="lbl">Business simulation games for the classroom</div>
+    <h1>Teaching &amp; <span>digital learning</span></h1>
+    <p class="intro">Two live browser games that teach marketing and strategy by doing. Students launch fashion brands, make decisions season by season, and see the market answer back. Watch a simulated class play first, then try it yourself.</p>
+    <p class="note">Both games are live and free to open: no sign-in or install. Every image, title and button opens the game. Apps can take up to 30 seconds to wake.</p>
+  </div>
+  <nav class="outline" aria-labelledby="ol-h">
+    <h2 id="ol-h">Course outline</h2>
+    <div class="prog" aria-hidden="true"><i></i></div>
+    <ol>
+      <li><a href="#featured"><b>01</b><span>Watch a class play<small>The Fashion Market Game</small></span></a></li>
+      <li><a href="#play"><b>02</b><span>Play it yourself<small>Single-player version</small></span></a></li>
+      <li><a href="#class"><b>03</b><span>Run it in a class<small>Outcomes, plan and questions</small></span></a></li>
+      <li><a href="#write-ups"><b>04</b><span>How the games work<small>Methods and write-ups</small></span></a></li>
+    </ol>
+  </nav>
+</div>
+
+<section class="feat" id="featured" aria-labelledby="f-title">
+  <div class="m"><a href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener"><img src="assets/previews/fmg-main.jpg" width="1400" height="743" alt="Three brand identity cards, KRAAK, Halden Rowe and silt studio, above the share race over four seasons"></a>
+    <div class="thumbs"><figure><a href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener"><img src="assets/previews/fmg-decisions.jpg" width="800" height="600" loading="lazy" alt="Each team's decisions for SS28 with arrows and notes, and the season's headline figures"></a><figcaption>Team decisions</figcaption></figure><figure><a href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener"><img src="assets/previews/fmg-stock.jpg" width="800" height="600" loading="lazy" alt="Where each brand's stock went, and profit this season"></a><figcaption>Stock and profit</figcaption></figure><figure><a href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener"><img src="assets/previews/fmg-segments.jpg" width="800" height="600" loading="lazy" alt="Heatmap of which brand won which shopper group"></a><figcaption>Who won which shoppers</figcaption></figure><figure><a href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener"><img src="assets/previews/fmg-waste.jpg" width="800" height="600" loading="lazy" alt="Cumulative profit against units wasted for each brand, season by season"></a><figcaption>Profit against waste</figcaption></figure></div>
+  </div>
+  <div>
+    <span class="pill">Lesson 01 · Watch</span><span class="pill live">● Live</span><span class="pill coral">Simulated classroom</span>
+    <h2 id="f-title"><a href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener">The Fashion Market Game</a></h2>
+    <p>What happens when three student teams launch rival fashion brands? Step through a simulated classroom game season by season, watch market shocks hit, and see which brand identity wins the customers.</p>
+    <p>Three fictional teams, KRAAK (loud and experimental), Halden Rowe (quiet and classic) and silt studio (quiet and experimental), compete for 100,000 shoppers a season. The debrief shows that the winner depends on whether you count profit alone, or profit, people and planet.</p>
+    <p><a class="btn" href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener">Open the game →</a><a class="more" href="#w-demo">Read the write-up ↓</a></p>
+    <div class="facts"><div><b>3 teams</b>fictional brands</div><div><b>4 seasons</b>with market shocks</div><div><b>2 ways</b>to keep score</div><div><b>60–90 min</b>as a class session</div></div>
+  </div>
+</section>
+
+<section class="s" id="play" aria-labelledby="s1">
+  <div class="sh"><div class="num">02</div><div><h2 id="s1">Play it yourself</h2><p>The same market as a game for one: build a label and take on the three brands from the demo.</p></div></div>
+  <article class="card">
+    <a class="pic" href="https://fashion-market-game-single-player.streamlit.app" target="_blank" rel="noopener"><img src="assets/previews/fmsp-card.jpg" width="1000" height="625" loading="lazy" alt="A taste-shift shock card with arrows on the identity map and advice on what it means for your brand"></a>
+    <div>
+      <span class="pill">Lesson 02 · Play</span><span class="pill live">● Live</span><span class="pill coral">Simulated market</span>
+      <h3><a href="https://fashion-market-game-single-player.streamlit.app" target="_blank" rel="noopener">The Fashion Market Game: Single Player</a></h3>
+      <p>Can you outsmart three rival fashion brands? Build your own label, set its identity, and steer it through four seasons of shifting tastes and market shocks.</p>
+      <p>Play the set scenario to compare results with a class, or random shocks for a new game each time. Every game has a number, so a link replays it exactly.</p>
+      <div class="links"><a class="btn" href="https://fashion-market-game-single-player.streamlit.app" target="_blank" rel="noopener">Open the game →</a><a href="#w-single">Write-up ↓</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="s" id="class" aria-labelledby="s2">
+  <div class="sh"><div class="num">03</div><div><h2 id="s2">Run it in a class</h2><p>Learning outcomes, a session plan and debrief questions, taken from the tutor notes in the games.</p></div></div>
+  <div class="kit">
+    <div class="panel"><h3>Learning outcomes</h3><p style="margin:0 0 6px;color:var(--muted)">By the end, students can:</p><ul class="oc"><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg><span>Explain <b>segmentation and positioning</b>, and spot a gap in the market.</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg><span>Reason about <b>price sensitivity</b> across different customer groups.</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg><span>Weigh <b>inventory risk</b>: the cost of selling out against the cost of waste.</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg><span>Discuss the <b>sustainability trade-off</b> and how the scoring rule changes who wins.</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg><span>Anticipate <b>competitive response</b> and react to market shocks.</span></li><li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg><span>Make <b>data-informed decisions</b> from a dashboard of results.</span></li></ul></div>
+    <div class="panel"><h3>A 60–90 minute session</h3><ol class="plan"><li class="step"><span class="t">5 min</span><span><b>Teams form</b>Groups of three, each with a role: designer, buyer, marketer.</span></li><li class="step"><span class="t">10–15 min</span><span><b>Brand building</b>Each team sets its two identity dials and names its brand; the wordmark appears as they go.</span></li><li class="step"><span class="t">4 × 10 min</span><span><b>Four seasons</b>Reveal the shock, teams make their decisions, the tutor runs the round, then a three-minute debrief on the race, the map and the stock chart.</span></li><li class="step"><span class="t">15 min</span><span><b>Final debrief</b>Compare the two scoring rules and work through the discussion questions.</span></li></ol></div>
+    <div class="panel qs"><h3>Questions for the debrief</h3><ol><li>Nobody occupied loud + classic. Should someone have, and who would they have taken shoppers from?</li><li>Was KRAAK's growth worth its waste? What would you have produced in SS28?</li><li>Halden Rowe sold out three seasons running. Was that discipline, or money left on the table?</li><li>silt studio never wasted a unit, but never had enough stock either. How would you plan production?</li><li>If a brand could move one dial for the final season, which brand should, and which way?</li></ol></div>
+  </div>
+</section>
+
+<section class="s" id="write-ups" aria-labelledby="s3">
+  <div class="sh"><div class="num">04</div><div><h2 id="s3">How the games work</h2><p>For each game: the question, the data, the method, the main results and what to be careful about.</p></div></div>
+  <article class="wu" id="w-demo">
+    <div class="wtop"><span class="pill">Lesson 01</span><span class="pill live">● Live</span><h3>The Fashion Market Game</h3><p class="meta">Simulated classroom · 3 teams · 4 seasons (SS27–AW28) · 100,000 shoppers a season</p></div>
+    <div class="wgrid"><div class="wr"><h4>Question</h4><p>What happens when three student teams launch rival fashion brands with different identities, and which identity and strategy wins the customers through four seasons of market shocks?</p></div><div class="wr"><h4>Data</h4><p>All simulated (seed 42) and labelled "Simulated classroom": fictional teams, students and brands (KRAAK, Halden Rowe and silt studio, each name checked against real fashion brands) and four shopper groups: Value (40,000), Trend-led (30,000), Conscious (15,000) and Premium (15,000).</p></div><div class="wr"><h4>Method</h4><ul><li>Shoppers choose between brands, or buy elsewhere, with a multinomial logit model: price, perceived design, sustainability, awareness and distance from the brand's identity to the group's ideal all matter.</li><li>Sales are capped by what each team produced; leftover stock is half marked down and half wasted. Awareness carries over from season to season.</li><li>Four shocks: a viral trend, a 15% cotton price rise, a supplier scandal that hits whoever has the weakest sustainability record, and a quiet-luxury turn.</li><li>Two scoring rules: profit only, and "profit, people and planet" (half profit rank, a quarter sustainability, a quarter low waste). Automated tests check that the story stays teachable.</li></ul></div><div class="wr"><h4>Main results</h4><p>KRAAK leads the share race in the first two seasons; the scandal hands the lead to silt studio in SS28, and KRAAK takes it back in AW28. Under "profit only" KRAAK wins with £518k but wastes 9,348 units; under "profit, people and planet" silt studio wins (0.75 against KRAAK's 0.72 and Halden Rowe's 0.39). Each brand wins one shopper group, and the loud-and-classic corner is left empty for the class to argue about.</p></div><div class="wr"><h4>What you can explore</h4><p>Step through the launch, four seasons and the debrief, or press Play; shock cards; each team's decisions and notes; the share race; the identity map with moving shopper zones; stock, profit and a leaderboard that switches scoring rule; a three-sentence story of each round; and a debrief with discussion questions and tutor notes.</p></div><div class="wr"><h4>Caveats</h4><ul><li>A precomputed demonstration of one classroom run, tuned by hand for teaching.</li><li>A deliberately simple model of demand, not a forecast of any real market.</li></ul></div></div>
+    <figure><img src="assets/previews/fmg-fig.jpg" width="1040" height="375" loading="lazy" alt="Two leaderboards side by side: KRAAK wins on profit only, silt studio wins on profit, people and planet"><figcaption>The debrief: who wins depends on what you count.</figcaption></figure>
+    <p class="wact"><a class="btn" href="https://fashion-market-game.streamlit.app" target="_blank" rel="noopener">Open the game →</a><a class="top-link" href="#top">Back to top ↑</a></p>
+  </article>
+  <article class="wu" id="w-single">
+    <div class="wtop"><span class="pill">Lesson 02</span><span class="pill live">● Live</span><h3>The Fashion Market Game: Single Player</h3><p class="meta">One player against three computer brands · 4 seasons · a set scenario or 8 random shocks</p></div>
+    <div class="wgrid"><div class="wr"><h4>Question</h4><p>Can a student build a brand and steer it through four seasons of shifting tastes and shocks better than three rule-based rival brands?</p></div><div class="wr"><h4>Data</h4><p>All simulated and labelled "Simulated market". The demo's model, brands and colours are reused. Two modes: a set scenario (the demo's four shocks, so the same decisions always give the same result) and random shocks, which draws four of eight shocks from a game number that can be typed in or shared as a link.</p></div><div class="wr"><h4>Method</h4><ul><li>Each season the shock is revealed first, with arrows on the identity map showing how shopper groups move, then the player decides price, design, sustainability, marketing, production and any change of identity, with a live cost preview.</li><li>Repositioning has a price: up to 0.4 per dial a season, a fee of up to £50k and a temporary dip in awareness. The rivals follow simple written rules and react if the player takes more than 15% of their closest shopper group.</li><li>Balance-checked by simulation, colour-checked for colour-vision deficiency, and covered by 91 automated tests.</li></ul></div><div class="wr"><h4>Main results</h4><p>The game is hard to win by luck: random strategies win on profit alone in about one game in ten (9.4% in the set scenario, 10.6% with random shocks). A focused strategy works: the "Conscious specialist" wins under both scoring rules in the set scenario, which is the hint in the tutor notes. The empty loud-and-classic corner looks like a gap in the market, but no shoppers live there.</p></div><div class="wr"><h4>What you can explore</h4><p>Build a label (name, one of six palettes, two identity dials and a live wordmark); play four seasons with shocks, decisions and results (share race, identity map with trails, stock, leaderboard, round story); then a debrief with both scoring rules, your path, best and worst season, reflection questions, and play again or replay.</p></div><div class="wr"><h4>Caveats</h4><ul><li>The game lives only in the visitor's browser session: refreshing the page starts again.</li><li>Rivals follow simple rules; the market is a teaching model, not a real one.</li></ul></div></div>
+    <figure><img src="assets/previews/fmsp-fig.jpg" width="1040" height="805" loading="lazy" alt="Build your label screen: brand name, palette, two identity dials and the live wordmark, with the brand's position on the identity map"><figcaption>Build your label: the wordmark and map position update as you set the dials.</figcaption></figure>
+    <p class="wact"><a class="btn" href="https://fashion-market-game-single-player.streamlit.app" target="_blank" rel="noopener">Open the game →</a><a class="top-link" href="#top">Back to top ↑</a></p>
+  </article>
+</section>
+</main>
+
+<footer>
+  <div class="a">Farzad Vaziri · Teaching and digital learning</div>
+  <div>
+    <p>Both games are simulations: all teams, students, brands, shoppers and figures are fictional. Fonts in the games: Playfair Display, Inter, Archivo Black, Syne and Cormorant Garamond (SIL Open Font License).</p>
+    <p>The games run on Streamlit's free tier, so one that hasn't been used for a while can take up to 30 seconds to wake. A game's progress lives in the browser tab: refreshing starts again.</p>
+  </div>
+</footer>
+</div>
+</body>
+</html>
